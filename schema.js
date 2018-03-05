@@ -1,6 +1,6 @@
 export default `
 
-type Talk {
+type Control {
   _id: String
   name: String
   conferenceName: String
@@ -12,33 +12,47 @@ type Talk {
 }
 
 type Query {
-  allTalks(
+  allControls(
     name: String,
     conferenceName: String,
     video: String,
     description: String,
     speakerName: String,
-  ): [Talk!]!,
+  ): [Control!]!,
 
-  getTalk(
+  getControl(
     id: String!
-  ): Talk!
+  ): Control!,
+
+  allUsers(
+    email:String,
+    password:String
+  ):[User]!
 }
 
 type Mutation {
-  createTalk(
+  createControl(
     name: String!,
     conferenceName: String!,
     video: String!,
     description: String!,
     speakerName: String!,
     date: String!
-  ): Talk!
+  ): Control!
 
+  registerUser(
+    email:String!,
+    password:String!
+  ): User!
 
-  upvoteTalk(
+  upvoteControl(
     id: String!
-  ): Talk!
+  ): Control!
+}
+type User{
+  _id:String
+  email:String
+  password:String
 }
 
 `

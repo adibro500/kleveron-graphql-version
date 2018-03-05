@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const Talk = mongoose.model('Talk', {
+const Control = mongoose.model('Control', {
   name: String,
   conferenceName: String,
   video: String,
@@ -10,4 +10,6 @@ const Talk = mongoose.model('Talk', {
   date: Date
 })
 
-export default Talk
+
+
+export default Control

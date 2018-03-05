@@ -5,9 +5,13 @@ import { makeExecutableSchema } from 'graphql-tools'
 import mongoose from 'mongoose'
 
 import typeDefs from './schema'
+import typeDefs2 from './user-schema'
 import resolvers from './resolvers'
-import Talk from './model'
+import resolvers2 from './user-resolver'
+import Control from './model'
+import User from './user-model'
 const env = require('dotenv').config()
+
 
 const schema = makeExecutableSchema({
   typeDefs,
@@ -15,22 +19,34 @@ const schema = makeExecutableSchema({
 })
 
 mongoose.connect(
-  `mongodb://${process.env.DB_USER}:${
-    process.env.DB_PASS
-  }@ds042527.mlab.com:42527/awesome-talks`
+ 
+  'mongodb://root:root@ds133378.mlab.com:33378/kleveron' 
 )
 
 const PORT = 3000
 
 const app = express()
 
+// app.use(
+//   '/graphql',
+//   bodyParser.json(),
+//   graphqlExpress({ schema, context: { User }})
+// )
+
 app.use(
   '/graphql',
   bodyParser.json(),
-  graphqlExpress({ schema, context: { Talk } })
+  graphqlExpress({ schema, context: { Control,User }})
 )
 
+
+// app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
+
+app.get('/',(req,res)=>{
+  res.redirect('/graphiql');
+}
+)
 
 app.listen(PORT)
 
