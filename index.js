@@ -47,7 +47,7 @@ app.get('/',(req,res)=>{
   res.redirect('/graphiql');
 }
 )
-
-app.listen(PORT)
+var port = process.env.PORT || 3000;
+app.listen(port)
 
 console.log(`YASS QUEEN ON PORT: ${PORT}`)
